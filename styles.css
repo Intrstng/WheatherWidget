@@ -7,16 +7,21 @@ p {
   margin: 0;
 }
 hr {
-  width: 90%;
+  width: 88%;
   color:rgba(255, 230, 230, 0.7);
 }
 
-.widget {
-  max-width: 350px;
+#widget {
+  position: absolute;
+  top: 40px;
+  right: 60px;
+  max-width: 340px;
   border-radius: 15px;
   background-image: url('https://pixabay.com/get/ga0a1a8ae9ec66c25bfa3d236868e4b8ef9575a92da9c2128f805500cf9ca83de7cc32b9ede3882a58983db6c8ec1aac03a5bf08900c0913a7d7b51f05be59f0a19df14239179d94364008c529f0a56cb_1920.jpg');
   background-size: cover;
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: all 0.5s ease;
 }
 
 .widget__controls {
@@ -30,12 +35,15 @@ hr {
   align-items: center;
 }
 .widget__title {
-  padding: 10px 18px 0;
+  padding: 10px 20px 0;
   /* background-color: rgba(83, 65, 186, 0.6); */
 }
-
+.widget__show-forecast {
+  width: 50%;
+}
 .widget__show-forecast,
 .widget__reload-forecast {
+  font-size: 0.9rem;
   text-decoration: none;
   color: rgba(255, 255, 255, 0.8);
   transition: all 0.3s ease;
@@ -43,7 +51,7 @@ hr {
 
 .widget__show-forecast:hover,
 .widget__reload-forecast:hover {
-  color: rgb(255, 230, 230);
+  color:rgb(220, 232, 8);
 }
 
 /* .widget__reload-forecast {
@@ -79,6 +87,7 @@ hr {
 
 .widget__close-forecast:hover {
 	opacity: 1;
+  color:rgb(144, 150, 30);
 }
 .widget__close-forecast::before {
 	transform: rotate(45deg);
@@ -88,7 +97,6 @@ hr {
 	transform: rotate(-45deg);
 }
 .widget__geolocation {
-  margin-top: 5px;
   text-align: right;
   position: relative;
 }
@@ -124,7 +132,7 @@ hr {
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
-  padding: 0 18px;
+  padding: 0 25px;
 
 }
 .widget__weather-icon {
@@ -147,7 +155,7 @@ hr {
   color:rgba(254, 202, 44, 0.9);
 }
 .widget__block-additional {
-  padding: 15px 25px;
+  padding: 15px 20px 0;
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
@@ -183,7 +191,10 @@ hr {
   height: 30px;
   margin-bottom: 3px;
 }
-
+.second-line {
+  width: 88%;
+  margin: 10px auto 15px;
+}
 
 
 .widget__future-forecast {
@@ -192,6 +203,12 @@ hr {
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
+}
+.active {
+  display: flex;
+}
+.closed {
+  display: none;
 }
 .tomorrow,
 .first-d-after-tomorrow,
@@ -219,19 +236,25 @@ hr {
 .future-temp {
   color:rgb(255, 230, 230);
 }
-.open-widget {
-  border-radius: 20px;
+#open-widget {
+  opacity: 1;
+  position: absolute;
+  top: 40px;
+  right: 60px;
+  padding: 5px;
+  border-radius: 15px;
   border: none;
   cursor: pointer;
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3);
   background-color:rgb(30, 94, 150);
-  transition: all 0.2s ease;
+  transition: all 0.4s ease;
 }
 
-.open-widget:hover {
+#open-widget:hover {
   background-color: rgb(9, 127, 230);
 }
-.open-widget:active {
+#open-widget:active {
   box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.3);
   background-color:rgb(144, 150, 30);
 }
+

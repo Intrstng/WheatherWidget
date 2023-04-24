@@ -9,7 +9,7 @@
   <title>Wheather Widget</title>
 </head>
 <body>
-  <div class="widget">
+  <div id="widget">
     <div class="widget__controls">
       <a href="#" class="widget__show-forecast">Прогоноз на 3 дня</a>
       <a href="#" class="widget__reload-forecast">Обновить</a>
@@ -47,10 +47,11 @@
         <img class="widget__icon" src="https://img.icons8.com/dotty/80/ffffff/barometer-gauge.png" alt="pressure"/>
         <span class="pressure-info">213123</span>
         <span class="pressure-title">Атмосферное давление</span></div>
+        
       </div> 
-
-        <hr class="second-line">
-          <div class="widget__future-forecast">
+      <hr class="second-line">
+        
+          <div class="widget__future-forecast closed">
             <div class="tomorrow">
               <p class="future-date">01.12.23</p>
               <p class="future-day">wefew</p>
@@ -72,7 +73,7 @@
           </div>
         </div>
   </div>
-  <button class="open-widget"><img src="https://img.icons8.com/glyph-neue/64/ffffff/chance-of-storm.png"/></button>
+  <button id="open-widget"><img src="https://img.icons8.com/glyph-neue/64/ffffff/chance-of-storm.png"/></button>
   <script src="scripts.js"></script>
 </body>
 </html>

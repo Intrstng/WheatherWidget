@@ -73,18 +73,21 @@ WheatherWidget.prototype.buildHTML = function() {
             <p class="future-date"></p>
             <p class="future-day"></p>
             <div class="future-icon"></div>
+            <p class="future-description"></p>
             <p class="future-temp"></p>
           </div>
             <div class="first-d-after-tomorrow">
               <p class="future-date"></p>
               <p class="future-day"></p>
               <div class="future-icon"></div>
+              <p class="future-description"></p>
               <p class="future-temp"></p>
             </div>
               <div class="second-d-after-tomorrow">
                 <p class="future-date"></p>
                 <p class="future-day"></p>
                 <div class="future-icon"></div>
+                <p class="future-description"></p>
                 <p class="future-temp"></p>
               </div>
         </div>
@@ -191,17 +194,18 @@ WheatherWidget.prototype.printDataForThreeDays = function(data) {
   widget.querySelector('.first-d-after-tomorrow .future-day').textContent = this.weekDays[new Date(data.list[12].dt * 1000).getDay()];
   widget.querySelector('.second-d-after-tomorrow .future-day').textContent = this.weekDays[new Date(data.list[20].dt * 1000).getDay()];
  
-
-
-  console.log(data.list[4].dt, new Date(data.list[4].dt * 1000))
-  console.log(data.list[12].dt, new Date(data.list[12].dt * 1000))
-  console.log(data.list[20].dt, new Date(data.list[20].dt * 1000))
-  widget.querySelector('.tomorrow .future-temp').textContent = `${Math.round(data.list[4].main.temp)}${String.fromCodePoint(8451)}`; // 4 элемент в массиве это 12:00 завтрашнего дня
-  widget.querySelector('.first-d-after-tomorrow .future-temp').textContent = `${Math.round(data.list[12].main.temp)}${String.fromCodePoint(8451)}`; // 12 элемент в массиве это 12:00 послезавтрашнего дня
-  widget.querySelector('.second-d-after-tomorrow .future-temp').textContent = `${Math.round(data.list[20].main.temp)}${String.fromCodePoint(8451)}`; // 20 элемент в массиве это 12:00 дня после послезавтрашнего дня
   widget.querySelector('.tomorrow .future-icon').innerHTML = `<img src="https://openweathermap.org/img/wn/${data.list[4].weather[0].icon}@2x.png" alt="${data.list[4].weather[0].main}" width="50" height="50">`;
   widget.querySelector('.first-d-after-tomorrow .future-icon').innerHTML = `<img src="https://openweathermap.org/img/wn/${data.list[12].weather[0].icon}@2x.png" alt="${data.list[12].weather[0].main}" width="50" height="50">`;
   widget.querySelector('.second-d-after-tomorrow .future-icon').innerHTML = `<img src="https://openweathermap.org/img/wn/${data.list[20].weather[0].icon}@2x.png" alt="${data.list[20].weather[0].main}" width="50" height="50">`;
+
+  widget.querySelector('.tomorrow .future-description').textContent = data.list[4].weather[0].description;
+  widget.querySelector('.first-d-after-tomorrow .future-description').textContent = data.list[12].weather[0].description;
+  widget.querySelector('.second-d-after-tomorrow .future-description').textContent = data.list[20].weather[0].description;
+
+  widget.querySelector('.tomorrow .future-temp').textContent = `${Math.round(data.list[4].main.temp)}${String.fromCodePoint(8451)}`; // 4 элемент в массиве это 12:00 завтрашнего дня
+  widget.querySelector('.first-d-after-tomorrow .future-temp').textContent = `${Math.round(data.list[12].main.temp)}${String.fromCodePoint(8451)}`; // 12 элемент в массиве это 12:00 послезавтрашнего дня
+  widget.querySelector('.second-d-after-tomorrow .future-temp').textContent = `${Math.round(data.list[20].main.temp)}${String.fromCodePoint(8451)}`; // 20 элемент в массиве это 12:00 дня после послезавтрашнего дня
+ 
 }
 
 WheatherWidget.prototype.getDataFromApiForToday = function(link) {

@@ -202,7 +202,7 @@ hr {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 .active {
   display: flex;
@@ -226,12 +226,14 @@ hr {
   align-items: center;
 }
 .future-date {
+  font-size: 0.9rem;
   color:rgba(254, 202, 44, 0.9);
   font-weight: bold;
   margin: 3px 0;
   letter-spacing: 1px;
 }
 .future-day {
+  font-size: 0.8rem;
   color:rgb(255, 230, 230);
 }
 .future-icon {
@@ -239,8 +241,16 @@ hr {
   height: 45px;
  
 }
-.future-temp {
+.future-description {
+  margin: -3px 0 6px;
+  width: 90%;
+  height: 22px;
+  text-align: center;
   color:rgb(255, 230, 230);
+  font-size: 0.65rem;
+}
+.future-temp {
+  color: rgba(255, 127, 80, 0.8);
 }
 #open-widget {
   opacity: 1;

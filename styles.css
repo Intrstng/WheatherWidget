@@ -17,7 +17,8 @@ hr {
   right: 60px;
   max-width: 340px;
   border-radius: 15px;
-  background-image: url('https://pixabay.com/get/ga0a1a8ae9ec66c25bfa3d236868e4b8ef9575a92da9c2128f805500cf9ca83de7cc32b9ede3882a58983db6c8ec1aac03a5bf08900c0913a7d7b51f05be59f0a19df14239179d94364008c529f0a56cb_1920.jpg');
+  background-color: rgba(0, 0, 255, 0.8);
+  /* background-image: url('https://pixabay.com/get/ga0a1a8ae9ec66c25bfa3d236868e4b8ef9575a92da9c2128f805500cf9ca83de7cc32b9ede3882a58983db6c8ec1aac03a5bf08900c0913a7d7b51f05be59f0a19df14239179d94364008c529f0a56cb_1920.jpg'); */
   background-size: cover;
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3);
   opacity: 0;
@@ -140,16 +141,11 @@ hr {
   justify-content: flex-start;
   align-items: center;
 }
-.widget__weather-icon img {
-  width: 90px;
-  height: 90px;
-  font-size: 0;
-}
 .widget__description {
   color:rgb(255, 230, 230);
   font-weight: bold;
   letter-spacing: 1px;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   font-size: 0.9rem;
 }
 .widget__temperature {
@@ -233,16 +229,15 @@ hr {
   color:rgba(254, 202, 44, 0.9);
   font-weight: bold;
   margin: 3px 0;
+  letter-spacing: 1px;
 }
 .future-day {
   color:rgb(255, 230, 230);
-  margin-bottom: 3px;
 }
 .future-icon {
-  margin-bottom: 3px;
-  width: 40px;
-  height: 40px;
-  background-color:rgb(255, 230, 230);
+  width: 50px;
+  height: 45px;
+ 
 }
 .future-temp {
   color:rgb(255, 230, 230);

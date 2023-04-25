@@ -132,18 +132,21 @@ hr {
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
-  padding: 0 25px;
-
+  padding: 0 32px 0 25px;
 }
-.widget__weather-icon {
-  width: 120px;
-  height: 60px;
-  background-color: blanchedalmond;
-  margin-bottom: 5px;
+.widget__icon-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.widget__weather-icon img {
+  width: 90px;
+  height: 90px;
+  font-size: 0;
 }
 .widget__description {
   color:rgb(255, 230, 230);
-  margin-left: 40px;
   font-weight: bold;
   letter-spacing: 1px;
   text-transform: capitalize;
@@ -175,8 +178,9 @@ hr {
 .chance-rain-info,
 .humidity-info,
 .pressure-info {
-  color:rgb(255, 230, 230);
   flex-basis: 60%;
+  margin-bottom: 8px;
+  color:rgb(255, 230, 230);
 }
 
 .wind-title,
@@ -209,6 +213,13 @@ hr {
 }
 .closed {
   display: none;
+  /* -webkit-transition: max-height 1s; 
+  -moz-transition: max-height 1s; 
+  -ms-transition: max-height 1s; 
+  -o-transition: max-height 1s; 
+  transition: max-height 1s;  
+  overflow: hidden;
+  max-height: 0; */
 }
 .tomorrow,
 .first-d-after-tomorrow,

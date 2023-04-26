@@ -1,8 +1,4 @@
 function WheatherWidget() {
-  let widget = null;
-  let showWidgetBtn = null;
-  let url_1_day = null;
-  let url_3_day = null;
   this.weekDays = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
   this.backgroundImages = {
     '01': 'https://i.ibb.co/VY4pyZC/01d-2.jpg', // имя ключа выбрано числом т.к. ключ должен совпадать с номером иконки погоды
@@ -23,7 +19,7 @@ WheatherWidget.prototype.getWeather = function() {
 }
 
 WheatherWidget.prototype.buildHTML = function() {
-  widget = document.createElement('div');
+  const widget = document.createElement('div');
   widget.id = 'widget';
   widget.innerHTML = `
     <div class="widget__controls">
@@ -153,14 +149,13 @@ WheatherWidget.prototype.getGeolocation = function(day = 'today') {
     longitude = position.coords.longitude;
     url_1_day = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&lang=ru&units=metric`;
     url_3_day = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&lang=ru&units=metric`;
-console.log(url_1_day)
+
     if (day === 'today') this.getDataFromApiForToday(url_1_day)
     else if (day === 'threeDays') this.getDataFromApiForThreeDays(url_3_day)
   }
 
   const error = (err) => {
     alert(err.message);
-console.log(url_1_day)
     if (day === 'today') this.getDataFromApiForToday(url_1_day)
     else if (day === 'threeDays') this.getDataFromApiForThreeDays(url_3_day)
   }
@@ -183,7 +178,6 @@ WheatherWidget.prototype.printDataForToday = function(data) {
   widget.querySelector('.humidity-info').textContent = `${data.main.humidity} ${String.fromCodePoint(37)}`;
   widget.querySelector('.pressure-info').textContent = data.main.pressure + ' мм';
 }
-
 
 WheatherWidget.prototype.printDataForThreeDays = function(data) {
   const filteredWeatherArr_12AM = data.list.filter(elem => elem.dt_txt.includes('12:00:00')); // Массив данных прогноза погоды на 12 часов каждого дня
@@ -254,7 +248,6 @@ WheatherWidget.prototype.getDataFromApiForThreeDays = function(link) {
       .then(data => this.printDataForThreeDays(data)) 
       .catch(err => console.error('Fetch Error :-S', err))
 })}
-
 
 let widgetApp = new WheatherWidget();
 widgetApp.getWeather();

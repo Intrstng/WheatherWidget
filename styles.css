@@ -10,7 +10,6 @@ hr {
   width: 88%;
   color:rgba(255, 230, 230, 0.7);
 }
-
 #widget {
   position: absolute;
   top: 40px;
@@ -18,13 +17,11 @@ hr {
   max-width: 340px;
   border-radius: 15px;
   background-color: rgba(0, 0, 255, 0.8);
-  /* background-image: url('https://pixabay.com/get/ga0a1a8ae9ec66c25bfa3d236868e4b8ef9575a92da9c2128f805500cf9ca83de7cc32b9ede3882a58983db6c8ec1aac03a5bf08900c0913a7d7b51f05be59f0a19df14239179d94364008c529f0a56cb_1920.jpg'); */
   background-size: cover;
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3);
   opacity: 0;
   transition: all 0.5s ease;
 }
-
 .widget__controls {
   padding: 18px;
   background-color:rgba(243, 244, 252, 0.4);
@@ -37,7 +34,6 @@ hr {
 }
 .widget__title {
   padding: 10px 20px 0;
-  /* background-color: rgba(83, 65, 186, 0.6); */
 }
 .widget__show-forecast {
   width: 50%;
@@ -49,24 +45,14 @@ hr {
   color: rgba(255, 255, 255, 0.8);
   transition: all 0.3s ease;
 }
-
 .widget__show-forecast:hover,
 .widget__reload-forecast:hover {
   color:rgb(220, 232, 8);
 }
-
-/* .widget__reload-forecast {
-  margin-left: 25px;
-} */
-
 .widget__controls {
   font-weight: bold;
 }
-
 .widget__close-forecast {
-	/* position: absolute;
-	top: 30px;
-	right: 20px; */
   position: relative;
 	width: 16px;
 	height: 16px;
@@ -74,7 +60,6 @@ hr {
 	cursor: pointer;
   transition: opacity ease 0.5s;
 }
-
 .widget__close-forecast::before,
 .widget__close-forecast::after {
 	content: '';
@@ -85,7 +70,6 @@ hr {
 	height: 3px;
 	background: rgb(255, 230, 230);
 }
-
 .widget__close-forecast:hover {
 	opacity: 1;
   color:rgb(144, 150, 30);
@@ -93,7 +77,6 @@ hr {
 .widget__close-forecast::before {
 	transform: rotate(45deg);
 }
-
 .widget__close-forecast::after {
 	transform: rotate(-45deg);
 }
@@ -106,7 +89,6 @@ hr {
   width: 14px;
   margin-right: 5px;
 }
-
 .widget__day {
   display: flex;
   flex-wrap: nowrap;
@@ -115,7 +97,6 @@ hr {
   margin-bottom: 12px;
   font-size: 1rem;
 }
-
 .widget__weekday,
 .widget__date,
 .widget__city {
@@ -123,7 +104,6 @@ hr {
   font-weight: bold;
   letter-spacing: 1px;
 }
-
 .widget__city {
   font-size: 1.2rem;
   margin-left: 22px;
@@ -145,7 +125,6 @@ hr {
   color:rgb(255, 230, 230);
   font-weight: bold;
   letter-spacing: 1px;
-  /* text-transform: capitalize; */
   font-size: 0.9rem;
 }
 .widget__temperature {
@@ -169,7 +148,6 @@ hr {
   justify-content: space-between;
   align-items: center;
 }
-
 .wind-info,
 .chance-rain-info,
 .humidity-info,
@@ -178,14 +156,12 @@ hr {
   margin-bottom: 8px;
   color:rgb(255, 230, 230);
 }
-
 .wind-title,
 .humidity-title,
 .chance-rain-title,
 .pressure-title {
   color:rgb(255, 230, 230);
 }
-
 .widget__icon {
   width: 30px;
   height: 30px;
@@ -195,8 +171,6 @@ hr {
   width: 88%;
   margin: 10px auto 18px;
 }
-
-
 .widget__future-forecast {
   padding: 0 35px 18px;
   display: flex;
@@ -210,13 +184,6 @@ hr {
 }
 .closed {
   display: none;
-  /* -webkit-transition: max-height 1s; 
-  -moz-transition: max-height 1s; 
-  -ms-transition: max-height 1s; 
-  -o-transition: max-height 1s; 
-  transition: max-height 1s;  
-  overflow: hidden;
-  max-height: 0; */
 }
 .tomorrow,
 .first-d-after-tomorrow,
@@ -240,7 +207,6 @@ hr {
 .future-icon {
   width: 50px;
   height: 45px;
- 
 }
 .future-description {
   margin: -3px 0 6px;
@@ -266,7 +232,6 @@ hr {
   background-color:rgb(30, 94, 150);
   transition: all 0.4s ease;
 }
-
 #open-widget:hover {
   background-color: rgb(9, 127, 230);
 }

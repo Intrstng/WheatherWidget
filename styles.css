@@ -193,7 +193,7 @@ hr {
 }
 .second-line {
   width: 88%;
-  margin: 10px auto 15px;
+  margin: 10px auto 18px;
 }
 
 
@@ -203,6 +203,7 @@ hr {
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: flex-start;
+  gap: 15px;
 }
 .active {
   display: flex;
@@ -226,10 +227,10 @@ hr {
   align-items: center;
 }
 .future-date {
+  margin-bottom: 3px;
   font-size: 0.9rem;
   color:rgba(254, 202, 44, 0.9);
   font-weight: bold;
-  margin: 3px 0;
   letter-spacing: 1px;
 }
 .future-day {

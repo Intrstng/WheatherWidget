@@ -5,18 +5,16 @@ function WheatherWidget() {
   let url_3_day = null;
   this.weekDays = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
   this.backgroundImages = {
-    '01': 'https://i.ibb.co/dg3V5gr/01d.jpg', // имя ключа выбрано числом т.к. ключ должен совпадать с номером иконки погоды
+    '01': 'https://i.ibb.co/VY4pyZC/01d-2.jpg', // имя ключа выбрано числом т.к. ключ должен совпадать с номером иконки погоды
     '02': 'https://i.ibb.co/T2xSHkf/02d.jpg',
     '03': 'https://i.ibb.co/9sjp2PS/03d.jpg',
     '04': 'https://i.ibb.co/PFjPCDR/04d.jpg',
-    '09': 'https://i.ibb.co/YNDp50j/09d.jpg',
-    '10': 'https://i.ibb.co/fvQ0CSH/10d.jpg',
+    '09': 'https://i.ibb.co/fvQ0CSH/10d.jpg',
+    '10': 'https://i.ibb.co/MMr6WzV/10d.jpg',
     '11': 'https://i.ibb.co/c19TKzN/11d.jpg',
-    '13': 'https://i.ibb.co/hKHGVTd/13d.jpg',
+    '13': 'https://i.ibb.co/D8ztKCG/13d-2.jpg',
     '50': 'https://i.ibb.co/sCJsDPs/50d.jpg',
   }
-  // latitude = null;
-  // longitude = null;
 }
 
 WheatherWidget.prototype.getWeather = function() {
@@ -130,12 +128,16 @@ WheatherWidget.prototype.addHandlers = function() {
     showFutureForecastBtn.textContent === 'Прогоноз на 3 дня' ?
     showFutureForecastBtn.textContent = 'Скрыть прогноз' :
     showFutureForecastBtn.textContent = 'Прогоноз на 3 дня';
+    this.blankDataForThreeDays();
     this.getGeolocation('threeDays');
   });
 
   reloadForecastBtn.addEventListener('click', () => {
     this.getGeolocation('today');
-    !widget.querySelector('.widget__future-forecast').classList.contains('closed') && this.getGeolocation('threeDays');
+    if (!widget.querySelector('.widget__future-forecast').classList.contains('closed')) {
+      this.blankDataForThreeDays();
+      this.getGeolocation('threeDays');
+    }
   });
 } 
 
@@ -184,28 +186,48 @@ WheatherWidget.prototype.printDataForToday = function(data) {
 
 
 WheatherWidget.prototype.printDataForThreeDays = function(data) {
-  console.log(data)
-  console.log('data.list[4].main.temp', data.list[4].main.temp)
-  widget.querySelector('.tomorrow .future-date').textContent = data.list[4].dt_txt.slice(5, 10).split('-').reverse().join('.');
-  widget.querySelector('.first-d-after-tomorrow .future-date').textContent = data.list[12].dt_txt.slice(5, 10).split('-').reverse().join('.');
-  widget.querySelector('.second-d-after-tomorrow .future-date').textContent = data.list[20].dt_txt.slice(5, 10).split('-').reverse().join('.');
+  const filteredWeatherArr_12AM = data.list.filter(elem => elem.dt_txt.includes('12:00:00')); // Массив данных прогноза погоды на 12 часов каждого дня
+  widget.querySelector('.tomorrow .future-date').textContent = filteredWeatherArr_12AM[1].dt_txt.slice(5, 10).split('-').reverse().join('.'); // 1 элемент в массиве это 12:00 завтрашнего дня
+  widget.querySelector('.first-d-after-tomorrow .future-date').textContent = filteredWeatherArr_12AM[2].dt_txt.slice(5, 10).split('-').reverse().join('.'); // 2 элемент в массиве это 12:00 послезавтрашнего дня
+  widget.querySelector('.second-d-after-tomorrow .future-date').textContent = filteredWeatherArr_12AM[3].dt_txt.slice(5, 10).split('-').reverse().join('.'); // 3 элемент в массиве это 12:00 дня после послезавтрашнего дня
 
-  widget.querySelector('.tomorrow .future-day').textContent = this.weekDays[new Date(data.list[4].dt * 1000).getDay()];
-  widget.querySelector('.first-d-after-tomorrow .future-day').textContent = this.weekDays[new Date(data.list[12].dt * 1000).getDay()];
-  widget.querySelector('.second-d-after-tomorrow .future-day').textContent = this.weekDays[new Date(data.list[20].dt * 1000).getDay()];
+  widget.querySelector('.tomorrow .future-day').textContent = this.weekDays[new Date(filteredWeatherArr_12AM[1].dt * 1000).getDay()];
+  widget.querySelector('.first-d-after-tomorrow .future-day').textContent = this.weekDays[new Date(filteredWeatherArr_12AM[2].dt * 1000).getDay()];
+  widget.querySelector('.second-d-after-tomorrow .future-day').textContent = this.weekDays[new Date(filteredWeatherArr_12AM[3].dt * 1000).getDay()];
  
-  widget.querySelector('.tomorrow .future-icon').innerHTML = `<img src="https://openweathermap.org/img/wn/${data.list[4].weather[0].icon}@2x.png" alt="${data.list[4].weather[0].main}" width="50" height="50">`;
-  widget.querySelector('.first-d-after-tomorrow .future-icon').innerHTML = `<img src="https://openweathermap.org/img/wn/${data.list[12].weather[0].icon}@2x.png" alt="${data.list[12].weather[0].main}" width="50" height="50">`;
-  widget.querySelector('.second-d-after-tomorrow .future-icon').innerHTML = `<img src="https://openweathermap.org/img/wn/${data.list[20].weather[0].icon}@2x.png" alt="${data.list[20].weather[0].main}" width="50" height="50">`;
+  widget.querySelector('.tomorrow .future-icon').innerHTML = `<img src="https://openweathermap.org/img/wn/${filteredWeatherArr_12AM[1].weather[0].icon}@2x.png" alt="${filteredWeatherArr_12AM[1].weather[0].main}" width="50" height="50">`;
+  widget.querySelector('.first-d-after-tomorrow .future-icon').innerHTML = `<img src="https://openweathermap.org/img/wn/${filteredWeatherArr_12AM[2].weather[0].icon}@2x.png" alt="${filteredWeatherArr_12AM[2].weather[0].main}" width="50" height="50">`;
+  widget.querySelector('.second-d-after-tomorrow .future-icon').innerHTML = `<img src="https://openweathermap.org/img/wn/${filteredWeatherArr_12AM[3].weather[0].icon}@2x.png" alt="${filteredWeatherArr_12AM[3].weather[0].main}" width="50" height="50">`;
 
-  widget.querySelector('.tomorrow .future-description').textContent = data.list[4].weather[0].description;
-  widget.querySelector('.first-d-after-tomorrow .future-description').textContent = data.list[12].weather[0].description;
-  widget.querySelector('.second-d-after-tomorrow .future-description').textContent = data.list[20].weather[0].description;
+  widget.querySelector('.tomorrow .future-description').textContent = filteredWeatherArr_12AM[1].weather[0].description;
+  widget.querySelector('.first-d-after-tomorrow .future-description').textContent = filteredWeatherArr_12AM[2].weather[0].description;
+  widget.querySelector('.second-d-after-tomorrow .future-description').textContent = filteredWeatherArr_12AM[3].weather[0].description;
 
-  widget.querySelector('.tomorrow .future-temp').textContent = `${Math.round(data.list[4].main.temp)}${String.fromCodePoint(8451)}`; // 4 элемент в массиве это 12:00 завтрашнего дня
-  widget.querySelector('.first-d-after-tomorrow .future-temp').textContent = `${Math.round(data.list[12].main.temp)}${String.fromCodePoint(8451)}`; // 12 элемент в массиве это 12:00 послезавтрашнего дня
-  widget.querySelector('.second-d-after-tomorrow .future-temp').textContent = `${Math.round(data.list[20].main.temp)}${String.fromCodePoint(8451)}`; // 20 элемент в массиве это 12:00 дня после послезавтрашнего дня
+  widget.querySelector('.tomorrow .future-temp').textContent = `${Math.round(filteredWeatherArr_12AM[1].main.temp)}${String.fromCodePoint(8451)}`;
+  widget.querySelector('.first-d-after-tomorrow .future-temp').textContent = `${Math.round(filteredWeatherArr_12AM[2].main.temp)}${String.fromCodePoint(8451)}`;
+  widget.querySelector('.second-d-after-tomorrow .future-temp').textContent = `${Math.round(filteredWeatherArr_12AM[3].main.temp)}${String.fromCodePoint(8451)}`;
+}
+
+WheatherWidget.prototype.blankDataForThreeDays = function() {
+  widget.querySelector('.tomorrow .future-date').textContent = '';
+  widget.querySelector('.first-d-after-tomorrow .future-date').textContent = '';
+  widget.querySelector('.second-d-after-tomorrow .future-date').textContent = '';
+
+  widget.querySelector('.tomorrow .future-day').textContent = '';
+  widget.querySelector('.first-d-after-tomorrow .future-day').textContent = '';
+  widget.querySelector('.second-d-after-tomorrow .future-day').textContent = '';
  
+  widget.querySelector('.tomorrow .future-icon').innerHTML = '';
+  widget.querySelector('.first-d-after-tomorrow .future-icon').innerHTML = '';
+  widget.querySelector('.second-d-after-tomorrow .future-icon').innerHTML = '';
+
+  widget.querySelector('.tomorrow .future-description').textContent = '';
+  widget.querySelector('.first-d-after-tomorrow .future-description').textContent = '';
+  widget.querySelector('.second-d-after-tomorrow .future-description').textContent = '';
+
+  widget.querySelector('.tomorrow .future-temp').textContent = '';
+  widget.querySelector('.first-d-after-tomorrow .future-temp').textContent = '';
+  widget.querySelector('.second-d-after-tomorrow .future-temp').textContent = '';
 }
 
 WheatherWidget.prototype.getDataFromApiForToday = function(link) {
@@ -221,6 +243,7 @@ WheatherWidget.prototype.getDataFromApiForToday = function(link) {
 })}
 
 WheatherWidget.prototype.getDataFromApiForThreeDays = function(link) {
+  document.querySelector('.first-d-after-tomorrow .future-icon').innerHTML = '<img src="https://usagif.com/wp-content/uploads/loading-22.gif" alt="loading" width="35" height="35">';
   fetch(link)
     .then(response => {  
       if (response.status !== 200) {

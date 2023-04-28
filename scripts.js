@@ -181,21 +181,21 @@ WheatherWidget.prototype.printDataForToday = function(data) {
 
 WheatherWidget.prototype.printDataForThreeDays = function(data) {
   const filteredWeatherArr_12AM = data.list.filter(elem => elem.dt_txt.includes('12:00:00')); // Массив данных прогноза погоды на 12 часов каждого дня
-  widget.querySelector('.tomorrow .future-date').textContent = filteredWeatherArr_12AM[1].dt_txt.slice(5, 10).split('-').reverse().join('.'); // 1 элемент в массиве это 12:00 завтрашнего дня
-  widget.querySelector('.first-d-after-tomorrow .future-date').textContent = filteredWeatherArr_12AM[2].dt_txt.slice(5, 10).split('-').reverse().join('.'); // 2 элемент в массиве это 12:00 послезавтрашнего дня
-  widget.querySelector('.second-d-after-tomorrow .future-date').textContent = filteredWeatherArr_12AM[3].dt_txt.slice(5, 10).split('-').reverse().join('.'); // 3 элемент в массиве это 12:00 дня после послезавтрашнего дня
+  widget.querySelector('.tomorrow .future-date').textContent = filteredWeatherArr_12AM[0].dt_txt.slice(5, 10).split('-').reverse().join('.'); // 1 элемент в массиве это 12:00 завтрашнего дня
+  widget.querySelector('.first-d-after-tomorrow .future-date').textContent = filteredWeatherArr_12AM[1].dt_txt.slice(5, 10).split('-').reverse().join('.'); // 2 элемент в массиве это 12:00 послезавтрашнего дня
+  widget.querySelector('.second-d-after-tomorrow .future-date').textContent = filteredWeatherArr_12AM[2].dt_txt.slice(5, 10).split('-').reverse().join('.'); // 3 элемент в массиве это 12:00 дня после послезавтрашнего дня
 
-  widget.querySelector('.tomorrow .future-day').textContent = this.weekDays[new Date(filteredWeatherArr_12AM[1].dt * 1000).getDay()];
-  widget.querySelector('.first-d-after-tomorrow .future-day').textContent = this.weekDays[new Date(filteredWeatherArr_12AM[2].dt * 1000).getDay()];
-  widget.querySelector('.second-d-after-tomorrow .future-day').textContent = this.weekDays[new Date(filteredWeatherArr_12AM[3].dt * 1000).getDay()];
+  widget.querySelector('.tomorrow .future-day').textContent = this.weekDays[new Date(filteredWeatherArr_12AM[0].dt * 1000).getDay()];
+  widget.querySelector('.first-d-after-tomorrow .future-day').textContent = this.weekDays[new Date(filteredWeatherArr_12AM[1].dt * 1000).getDay()];
+  widget.querySelector('.second-d-after-tomorrow .future-day').textContent = this.weekDays[new Date(filteredWeatherArr_12AM[2].dt * 1000).getDay()];
  
-  widget.querySelector('.tomorrow .future-icon').innerHTML = `<img src="https://openweathermap.org/img/wn/${filteredWeatherArr_12AM[1].weather[0].icon}@2x.png" alt="${filteredWeatherArr_12AM[1].weather[0].main}" width="50" height="50">`;
-  widget.querySelector('.first-d-after-tomorrow .future-icon').innerHTML = `<img src="https://openweathermap.org/img/wn/${filteredWeatherArr_12AM[2].weather[0].icon}@2x.png" alt="${filteredWeatherArr_12AM[2].weather[0].main}" width="50" height="50">`;
-  widget.querySelector('.second-d-after-tomorrow .future-icon').innerHTML = `<img src="https://openweathermap.org/img/wn/${filteredWeatherArr_12AM[3].weather[0].icon}@2x.png" alt="${filteredWeatherArr_12AM[3].weather[0].main}" width="50" height="50">`;
+  widget.querySelector('.tomorrow .future-icon').innerHTML = `<img src="https://openweathermap.org/img/wn/${filteredWeatherArr_12AM[0].weather[0].icon}@2x.png" alt="${filteredWeatherArr_12AM[0].weather[0].main}" width="50" height="50">`;
+  widget.querySelector('.first-d-after-tomorrow .future-icon').innerHTML = `<img src="https://openweathermap.org/img/wn/${filteredWeatherArr_12AM[1].weather[0].icon}@2x.png" alt="${filteredWeatherArr_12AM[1].weather[0].main}" width="50" height="50">`;
+  widget.querySelector('.second-d-after-tomorrow .future-icon').innerHTML = `<img src="https://openweathermap.org/img/wn/${filteredWeatherArr_12AM[2].weather[0].icon}@2x.png" alt="${filteredWeatherArr_12AM[2].weather[0].main}" width="50" height="50">`;
 
-  widget.querySelector('.tomorrow .future-description').textContent = filteredWeatherArr_12AM[1].weather[0].description;
-  widget.querySelector('.first-d-after-tomorrow .future-description').textContent = filteredWeatherArr_12AM[2].weather[0].description;
-  widget.querySelector('.second-d-after-tomorrow .future-description').textContent = filteredWeatherArr_12AM[3].weather[0].description;
+  widget.querySelector('.tomorrow .future-description').textContent = filteredWeatherArr_12AM[0].weather[0].description;
+  widget.querySelector('.first-d-after-tomorrow .future-description').textContent = filteredWeatherArr_12AM[1].weather[0].description;
+  widget.querySelector('.second-d-after-tomorrow .future-description').textContent = filteredWeatherArr_12AM[2].weather[0].description;
 
   widget.querySelector('.tomorrow .future-temp').textContent = `${Math.round(filteredWeatherArr_12AM[1].main.temp)}${String.fromCodePoint(8451)}`;
   widget.querySelector('.first-d-after-tomorrow .future-temp').textContent = `${Math.round(filteredWeatherArr_12AM[2].main.temp)}${String.fromCodePoint(8451)}`;

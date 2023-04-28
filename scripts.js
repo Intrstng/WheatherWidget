@@ -97,7 +97,7 @@ WheatherWidget.prototype.buildHTML = function() {
 WheatherWidget.prototype.addCurrentDate = function() {
   let today = new Date();
   widget.querySelector('.widget__weekday').textContent = this.weekDays[today.getDay()];
-  widget.querySelector('.widget__date').textContent = `${String(today.getDate()).padStart(2, '0')}.${String(today.getMonth()).padStart(2, '0')}.${String(today.getFullYear()).padStart(2, '0')}`;
+  widget.querySelector('.widget__date').textContent = `${String(today.getDate()).padStart(2, '0')}.${String(today.getMonth() + 1).padStart(2, '0')}.${String(today.getFullYear()).padStart(2, '0')}`;
 }
 
 WheatherWidget.prototype.addHandlers = function() {

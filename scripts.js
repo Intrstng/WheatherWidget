@@ -1,4 +1,4 @@
-function WheatherWidget() {
+function WeatherWidget() {
   this.weekDays = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
   this.backgroundImages = {
     '01': 'https://i.ibb.co/VY4pyZC/01d-2.jpg', // имя ключа выбрано числом т.к. ключ должен совпадать с номером иконки погоды
@@ -13,12 +13,12 @@ function WheatherWidget() {
   }
 }
 
-WheatherWidget.prototype.getWeather = function() {
+WeatherWidget.prototype.getWeather = function() {
   this.buildHTML();
   this.addHandlers();
 }
 
-WheatherWidget.prototype.buildHTML = function() {
+WeatherWidget.prototype.buildHTML = function() {
   const widget = document.createElement('div');
   widget.id = 'widget';
   widget.innerHTML = `
@@ -94,13 +94,13 @@ WheatherWidget.prototype.buildHTML = function() {
   this.addCurrentDate();
 }
 
-WheatherWidget.prototype.addCurrentDate = function() {
+WeatherWidget.prototype.addCurrentDate = function() {
   let today = new Date();
   widget.querySelector('.widget__weekday').textContent = this.weekDays[today.getDay()];
   widget.querySelector('.widget__date').textContent = `${String(today.getDate()).padStart(2, '0')}.${String(today.getMonth() + 1).padStart(2, '0')}.${String(today.getFullYear()).padStart(2, '0')}`;
 }
 
-WheatherWidget.prototype.addHandlers = function() {
+WeatherWidget.prototype.addHandlers = function() {
   const closeWidgetBtn = widget.querySelector('.widget__close-forecast');
   const showFutureForecastBtn = widget.querySelector('.widget__show-forecast');
   const reloadForecastBtn = widget.querySelector('.widget__reload-forecast');
@@ -137,7 +137,7 @@ WheatherWidget.prototype.addHandlers = function() {
   });
 } 
 
-WheatherWidget.prototype.getGeolocation = function(day = 'today') {
+WeatherWidget.prototype.getGeolocation = function(day = 'today') {
   let latitude = 53.9; // Minsk by default
   let longitude = 27.5667; // Minsk by default
   const apiKey = 'f2ee85bef9bb3dbecbbcaa12e822aec6';
@@ -167,7 +167,7 @@ WheatherWidget.prototype.getGeolocation = function(day = 'today') {
   }
 }
 
-WheatherWidget.prototype.printDataForToday = function(data) {
+WeatherWidget.prototype.printDataForToday = function(data) {
   widget.style.backgroundImage = `url('${this.backgroundImages[data.weather[0].icon.slice(0,-1)]}')`;
   widget.querySelector('.widget__weather-icon').innerHTML = `<img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" alt="${data.weather[0].main}" width="90" height="90">`;
   widget.querySelector('.widget__city').textContent = data.name;
@@ -179,7 +179,7 @@ WheatherWidget.prototype.printDataForToday = function(data) {
   widget.querySelector('.pressure-info').textContent = data.main.pressure + ' мм';
 }
 
-WheatherWidget.prototype.printDataForThreeDays = function(data) {
+WeatherWidget.prototype.printDataForThreeDays = function(data) {
   const filteredWeatherArr_12AM = data.list.filter(elem => elem.dt_txt.includes('12:00:00')); // Массив данных прогноза погоды на 12 часов каждого дня
   widget.querySelector('.tomorrow .future-date').textContent = filteredWeatherArr_12AM[0].dt_txt.slice(5, 10).split('-').reverse().join('.'); // 1 элемент в массиве это 12:00 завтрашнего дня
   widget.querySelector('.first-d-after-tomorrow .future-date').textContent = filteredWeatherArr_12AM[1].dt_txt.slice(5, 10).split('-').reverse().join('.'); // 2 элемент в массиве это 12:00 послезавтрашнего дня
@@ -202,7 +202,7 @@ WheatherWidget.prototype.printDataForThreeDays = function(data) {
   widget.querySelector('.second-d-after-tomorrow .future-temp').textContent = `${Math.round(filteredWeatherArr_12AM[3].main.temp)}${String.fromCodePoint(8451)}`;
 }
 
-WheatherWidget.prototype.blankDataForThreeDays = function() {
+WeatherWidget.prototype.blankDataForThreeDays = function() {
   widget.querySelector('.tomorrow .future-date').textContent = '';
   widget.querySelector('.first-d-after-tomorrow .future-date').textContent = '';
   widget.querySelector('.second-d-after-tomorrow .future-date').textContent = '';
@@ -224,7 +224,7 @@ WheatherWidget.prototype.blankDataForThreeDays = function() {
   widget.querySelector('.second-d-after-tomorrow .future-temp').textContent = '';
 }
 
-WheatherWidget.prototype.getDataFromApiForToday = function(link) {
+WeatherWidget.prototype.getDataFromApiForToday = function(link) {
   fetch(link)
     .then(response => {  
       if (response.status !== 200) {
@@ -236,7 +236,7 @@ WheatherWidget.prototype.getDataFromApiForToday = function(link) {
       .catch(err => console.error('Fetch Error :-S', err))
 })}
 
-WheatherWidget.prototype.getDataFromApiForThreeDays = function(link) {
+WeatherWidget.prototype.getDataFromApiForThreeDays = function(link) {
   document.querySelector('.first-d-after-tomorrow .future-icon').innerHTML = '<img src="https://usagif.com/wp-content/uploads/loading-22.gif" alt="loading" width="35" height="35">';
   fetch(link)
     .then(response => {  
@@ -249,5 +249,5 @@ WheatherWidget.prototype.getDataFromApiForThreeDays = function(link) {
       .catch(err => console.error('Fetch Error :-S', err))
 })}
 
-let widgetApp = new WheatherWidget();
+let widgetApp = new WeatherWidget();
 widgetApp.getWeather();
